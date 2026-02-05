@@ -11,4 +11,3 @@ Route::get('/', function () {
 
 
 Route::resource('teachers',TeacherController::class);
-Route::resource()
