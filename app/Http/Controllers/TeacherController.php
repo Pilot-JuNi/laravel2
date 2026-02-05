@@ -29,7 +29,14 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        'Name'    => 'required|string|max:255',
+        'Kürzel' => 'required|string|max:3',
+        'deputat' => 'nullable|integer|min:0',
+        ]);
+ 
+        Teacher::create($validated);
+        return redirect()->route('teachers.index');    
     }
 
     /**
@@ -37,7 +44,9 @@ class TeacherController extends Controller
      */
     public function show(string $id)
     {
-        return view('teachers.show');
+        $teacher = Teacher::findOrfail($id);
+        return view('teachers.show', compact('teacher'));
+        
     }
 
     /**
