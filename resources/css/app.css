@@ -9,3 +9,14 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+body{
+    background: #9cd10a;
+    background: linear-gradient(90deg,rgba(156, 209, 10, 1) 0%, rgba(9, 150, 143, 1) 50%, rgba(0, 176, 18, 0.7) 100%);
+    color: rgb(0, 0, 0);
+    button{
+        background-color: rgb(9, 165, 165);
+    }
+    input{
+        background-color: rgb(212, 6, 6);
+    }
+}

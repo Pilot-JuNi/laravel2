@@ -30,13 +30,13 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-        'Name'    => 'required|string|max:255',
-        'Kürzel' => 'required|string|max:3',
-        'deputat' => 'nullable|integer|min:0',
+            'name' => 'required|string|max:255',
+            'kuerzel' => 'required|string|max:3|unique:teachers,Kürzel',
+            'deputat' => 'nullable|integer|min:0',
         ]);
- 
+
         Teacher::create($validated);
-        return redirect()->route('teachers.index');    
+        return redirect()->route('teachers.index')->with('success', 'Lehrer wurde erfolgreich hinzugefügt.');
     }
 
     /**
@@ -54,7 +54,8 @@ class TeacherController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+        return view('teachers.edit', compact('teacher'));
     }
 
     /**
@@ -62,7 +63,16 @@ class TeacherController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'kuerzel' => 'required|string|max:3|unique:teachers,Kürzel,' . $id,
+            'deputat' => 'nullable|integer|min:0',
+        ]);
+
+        $teacher->update($validated);
+        return redirect()->route('teachers.index')->with('success', 'Lehrer wurde erfolgreich aktualisiert.');
     }
 
     /**
@@ -70,6 +80,17 @@ class TeacherController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+        $teacher->delete();
+        return redirect()->route('teachers.index')->with('success', 'Lehrer wurde erfolgreich gelöscht.');
+    }
+
+    /**
+     * Show confirmation page before deleting.
+     */
+    public function confirmDelete(string $id)
+    {
+        $teacher = Teacher::findOrFail($id);
+        return view('teachers.confirmDelete', compact('teacher'));
     }
 }
