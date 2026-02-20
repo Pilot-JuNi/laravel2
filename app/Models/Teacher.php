@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-    protected $fillable = ['Name', 'Kürzel', 'Deputat'];
+    protected $fillable = ['name', 'kuerzel', 'deputat'];
     public $timestamps = true;
     
     // Mappin: Kleinbuchstaben Attribute zu Großbuchstaben Spalten

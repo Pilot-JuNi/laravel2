@@ -48,4 +48,39 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection  
+
+
+        <!--
+
+<x-layout>
+ 
+    <h1>Lehrer einstellen</h1>
+    <form method="POST" action="{{route('teachers.store')}}">
+        @csrf
+        <x-input-field label="Name" name="name" required />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <x-input-field label="Kürzel" name="kuerzel" />
+            <x-input-field label="Deputat" name="deputat" type="number" />
+        </div>
+        <div class="pt-2 flex justify-end gap-3">
+            <a href="{{route('teachers.index')}}">Abbruch</a>
+            <button type="submit">Speichern</button>
+        </div>
+ 
+ 
+ 
+ 
+ 
+ 
+         <label>Name</label>
+        <input type="text" name="name" required>
+ 
+        <label>Kürzel</label>
+        <input type="text" name="kuerzel">
+ 
+        <label>Deputat</label>
+        <input type="number" name="deputat">
+        <button type="submit">Knopf</button> 
+    </form>
+</x-layout>   -->
