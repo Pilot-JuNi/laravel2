@@ -29,15 +29,15 @@
                         </div>
                         <div class="col-md-6">
                             <p class="text-muted mb-1">Erstellt am</p>
-                            <h6>{{ $teacher->created_at->format('d.m.Y H:i') }}</h6>
+                            <h6>{{ optional($teacher->created_at)->format('d.m.Y H:i') ?? '-' }}</h6>
                         </div>
                     </div>
 
-                    @if($teacher->updated_at != $teacher->created_at)
+                    @if($teacher->updated_at && $teacher->updated_at != $teacher->created_at)
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <p class="text-muted mb-1">Zuletzt bearbeitet am</p>
-                                <h6>{{ $teacher->updated_at->format('d.m.Y H:i') }}</h6>
+                                <h6>{{ optional($teacher->updated_at)->format('d.m.Y H:i') ?? '-' }}</h6>
                             </div>
                         </div>
                     @endif

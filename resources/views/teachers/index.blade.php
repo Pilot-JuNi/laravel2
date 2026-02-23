@@ -21,12 +21,32 @@
     </div>
 
     @if($teachers->count() > 0)
-        <div class="row">
-            @foreach($teachers as $teacher)
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <x-teacher-card :teacher="$teacher" />
-                </div>
-            @endforeach
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Kürzel</th>
+                        <th>Deputat</th>
+                        <th class="text-end">Aktionen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($teachers as $teacher)
+                        <tr>
+                            <td>
+                                <a href="{{ route('teachers.show', $teacher->id) }}">{{ $teacher->name ?? '-' }}</a>
+                            </td>
+                            <td>{{ $teacher->kuerzel ?? '-' }}</td>
+                            <td>{{ $teacher->deputat ?? '-' }}</td>
+                            <td class="text-end">
+                                <a href="{{ route('teachers.edit', $teacher->id) }}" class="btn btn-sm btn-outline-primary">Bearbeiten</a>
+                                <a href="{{ route('teachers.confirmDelete', $teacher->id) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     @else
         <div class="alert alert-info">

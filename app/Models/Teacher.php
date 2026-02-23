@@ -8,33 +8,36 @@ class Teacher extends Model
 {
     protected $fillable = ['name', 'kuerzel', 'deputat'];
     public $timestamps = true;
-    
-    // Mappin: Kleinbuchstaben Attribute zu Großbuchstaben Spalten
-    public function getAttribute($key)
+    /**
+     * Accessor/Mutator mapping for columns with different names (case/umlaut).
+     */
+    public function getNameAttribute()
     {
-        if ($key === 'name') {
-            return parent::getAttribute('Name');
-        }
-        if ($key === 'kuerzel') {
-            return parent::getAttribute('Kürzel');
-        }
-        if ($key === 'deputat') {
-            return parent::getAttribute('Deputat');
-        }
-        return parent::getAttribute($key);
+        return $this->attributes['Name'] ?? $this->attributes['name'] ?? null;
     }
 
-    public function setAttribute($key, $value)
+    public function setNameAttribute($value)
     {
-        if ($key === 'name') {
-            return parent::setAttribute('Name', $value);
-        }
-        if ($key === 'kuerzel') {
-            return parent::setAttribute('Kürzel', $value);
-        }
-        if ($key === 'deputat') {
-            return parent::setAttribute('Deputat', $value);
-        }
-        return parent::setAttribute($key, $value);
+        $this->attributes['Name'] = $value;
+    }
+
+    public function getKuerzelAttribute()
+    {
+        return $this->attributes['Kürzel'] ?? $this->attributes['kuerzel'] ?? null;
+    }
+
+    public function setKuerzelAttribute($value)
+    {
+        $this->attributes['Kürzel'] = $value;
+    }
+
+    public function getDeputatAttribute()
+    {
+        return $this->attributes['Deputat'] ?? $this->attributes['deputat'] ?? null;
+    }
+
+    public function setDeputatAttribute($value)
+    {
+        $this->attributes['Deputat'] = $value;
     }
 }
