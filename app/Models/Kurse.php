@@ -14,7 +14,21 @@ class Kurse extends Model
      * produces `kurses` but the actual table is `kurse`.
      */
     protected $table = 'kurse';
-     public function teacher(){
+
+    /**
+     * Allow mass assignment for these attributes.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'kursname',
+        'beschreibung',
+        'anzahl_studenten',
+        'anzahl_stunden',
+        'teacher_id',
+    ];
+
+    public function teacher(){
         return $this->belongsTo(Teacher::class);
     }
  

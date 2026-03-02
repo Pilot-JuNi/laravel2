@@ -11,5 +11,7 @@ Route::get('/', function () {
 Route::resource('teachers', TeacherController::class);
 Route::get('teachers/{teacher}/confirmDelete', [TeacherController::class, 'confirmDelete'])->name('teachers.confirmDelete');
 
-// resource route for courses
-Route::resource('kurse', KurseController::class)->only(['index']);
+// resource routes for courses (all RESTful actions)
+// The controller already implements create, store, show, edit, update, destroy
+// so we register the full resource to provide named routes such as kurse.create
+Route::resource('kurse', KurseController::class);

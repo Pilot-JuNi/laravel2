@@ -15,10 +15,9 @@
         <div class="col-md-6">
             <h1>Kurs Übersicht</h1>
         </div>
-        {{-- optionally add create button if desired later --}}
-        {{-- <div class="col-md-6 text-end">
+        <div class="col-md-6 text-end">
             <a href="{{ route('kurse.create') }}" class="btn btn-primary">+ Neuer Kurs</a>
-        </div> --}}
+        </div>
     </div>
 
     @if($kurse->count() > 0)
@@ -29,7 +28,9 @@
                         <th>Kursname</th>
                         <th>Beschreibung</th>
                         <th>Anzahl Studenten</th>
+                        <th>Anzahl Stunden</th>
                         <th>Lehrer</th>
+                        <th>Aktionen</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +39,7 @@
                             <td>{{ $kurs->kursname ?? '-' }}</td>
                             <td>{{ $kurs->beschreibung ?? '-' }}</td>
                             <td>{{ $kurs->anzahl_studenten ?? '-' }}</td>
+                            <td>{{ $kurs->anzahl_stunden ?? '-' }}</td>
                             <td>
                                 @if($kurs->teacher)
                                     <a href="{{ route('teachers.show', $kurs->teacher->id) }}">
@@ -46,6 +48,15 @@
                                 @else
                                     -
                                 @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('kurse.show', $kurs->id) }}" class="btn btn-sm btn-info">Ansehen</a>
+                                <a href="{{ route('kurse.edit', $kurs->id) }}" class="btn btn-sm btn-warning">Bearbeiten</a>
+                                <form action="{{ route('kurse.destroy', $kurs->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Möchten Sie diesen Kurs wirklich löschen?')">Löschen</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
