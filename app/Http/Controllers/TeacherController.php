@@ -68,7 +68,7 @@ class TeacherController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'kuerzel' => 'required|string|max:3|unique:teachers,Kürzel,' . $id,
-            'deputat' => 'integer|min:0',
+            'deputat' => 'nullable|integer|',
         ]);
 
         $teacher->update($validated);
